@@ -6,7 +6,7 @@
 /*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:10:29 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/17 23:25:01 by ebelkhei         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:49:44 by ebelkhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ int	main(int argc, char *argv[])
 		return (0);
 	print_data(&comp);
 	
-	// system("leaks cub3d");
+	system("leaks cub3d");
 }

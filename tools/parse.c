@@ -6,7 +6,7 @@
 /*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:27:23 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/17 23:37:06 by ebelkhei         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:20:38 by ebelkhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	parse_rgb(t_elements *elements, char *color, int a)
 int	check(char **el, t_elements *elements)
 {
 	if ((arr_size(el) != 2))
-		return (!printf("Invalid element\n"));
+		return (!printf("Invalid element \n"));
 	if (!ft_strcmp(el[0], "NO"))
 		elements->n_texture = ft_strdup(el[1]);
 	else if (!ft_strcmp(el[0], "SO"))
@@ -128,57 +128,6 @@ int	check_element(char *element, t_elements *elements)
 	return (ft_free_all_mfs(el), 0);
 }
 
-int	read_map(int fd, t_components *comp, char *line)
-{
-	char	*tmp;
-	char	*map;
-
-	tmp = line;
-	map = NULL;
-	while (tmp)
-	{
-		if (tmp && *tmp == '\n')
-			return (free(tmp), free(map), !printf("Invalid Map\n"));
-		map = ft_join(map, tmp);
-		free(tmp);
-		tmp = get_next_line(fd);
-	}
-	comp->map = ft_split(map, '\n');
-	free(map);
-	return (1);
-}
-
-int	check_map(char **map)
-{
-	int	player;
-	int	i;
-	int	j;
-
-	player = 0;
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'W' || map[i][j] == 'E')
-				{
-					if (player)
-						return (!printf("Too many players\n"));
-					player = 1;
-				}
-			else if (map[i][j] != '1' && map[i][j] != '0')
-				return (!printf("Invalid character in map\n"));
-			j++;
-		}
-		i++;
-	}
-	if (!player)
-		return (!printf("The Player is missing\n"));
-	return (1);
-}
-
 int	read_file(char *arg, t_components *comp)
 {
 	int		scene_file;
@@ -191,7 +140,7 @@ int	read_file(char *arg, t_components *comp)
 	if (scene_file == -1)
 		return (!printf("Invalid File\n"));
 	line = get_next_line(scene_file);
-	while (line && *line != '0' && *line != '1')
+	while (line && !is_map_element(line))
 	{
 		if (!check_element(line, &comp->elements))
 			return (0);
