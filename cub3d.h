@@ -6,7 +6,7 @@
 /*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:11:07 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/16 18:28:56 by ebelkhei         ###   ########.fr       */
+/*   Updated: 2023/03/17 22:45:12 by ebelkhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,19 @@ typedef struct t_components
 	char 		**map;
 } t_components;
 
-char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-char	*ft_join(char *str1, char *str2);
-char	*ft_strchr(const char *str, int c);
-size_t	get_len(char *str);
-int     ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_strcmp(const char *s1, const char *s2);
-char	**ft_split(char const *s, char c);
-char	*ft_strdup(const char *ptr);
-int		ft_strlcpy(char *dst, const char *src, int dstsize);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-void	ft_free_all_mfs(char **str);
+char		*get_next_line(int fd);
+size_t		ft_strlen(const char *s);
+char		*ft_join(char *str1, char *str2);
+char		*ft_strchr(const char *str, int c);
+size_t		get_len(char *str);
+int     	ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strcmp(const char *s1, const char *s2);
+char		**ft_split(char const *s, char c);
+char		*ft_strdup(const char *ptr);
+int			ft_strlcpy(char *dst, const char *src, int dstsize);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+void		ft_free_all_mfs(char **str);
 long long	ft_atoi(const char *str);
+char		*ft_strtrim(char const *s1, char const *set);
+int			ft_isdigit(int arg);
+int			read_file(char *arg, t_components *comp);

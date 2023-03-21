@@ -19,6 +19,6 @@ clean	:
 
 fclean	: clean
 		@rm -rf $(NAME)
-		@echo $(NAME) was deleted
+		@echo "\x1B[31m $(NAME) was deleted \x1B[0m"
 
 re		: fclean all
