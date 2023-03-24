@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:11:07 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/21 14:04:43 by ebelkhei         ###   ########.fr       */
+/*   Updated: 2023/03/24 22:59:13 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,5 @@ int			read_file(char *arg, t_components *comp);
 int	read_map(int fd, t_components *comp, char *line);
 int	check_map(char **map);
 int is_map_element(char *str);
+int	arr_size(char **arr);
+int check_space(char **map, int i, int j);

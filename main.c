@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:10:29 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/21 16:49:44 by ebelkhei         ###   ########.fr       */
+/*   Updated: 2023/03/24 16:41:05 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char *argv[])
 	initialize_comps(&comp);
 	if (!read_file(argv[1], &comp) || !check_comps(&comp))
 		return (0);
-	print_data(&comp);
+	// print_data(&comp);
 	
-	system("leaks cub3d");
+	// system("leaks cub3d");
 }
