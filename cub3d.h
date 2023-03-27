@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:11:07 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/24 22:59:13 by elias            ###   ########.fr       */
+/*   Updated: 2023/03/27 02:56:14 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct t_elements
 typedef struct t_components
 {
 	t_elements	elements;
+	int			player_x;
+	int			player_y;
 	char 		**map;
 } t_components;
 
@@ -62,7 +64,7 @@ char		*ft_strtrim(char const *s1, char const *set);
 int			ft_isdigit(int arg);
 int			read_file(char *arg, t_components *comp);
 int	read_map(int fd, t_components *comp, char *line);
-int	check_map(char **map);
+int check_map(char **map, t_components *comp);
 int is_map_element(char *str);
 int	arr_size(char **arr);
 int check_space(char **map, int i, int j);

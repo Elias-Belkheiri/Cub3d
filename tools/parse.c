@@ -3,23 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:27:23 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/21 14:20:38 by ebelkhei         ###   ########.fr       */
+/*   Updated: 2023/03/27 03:42:14 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-// the numbers must be << 255 && > 0
+void	set_player_cords(t_components *comp)
+{
+	int        i;
+    int        j;
 
-
-// keep reading until u found a null or a map line;
-// for the line that has been read:
-// if It's a newline, continue;
-// if not, split by space and check the first argument. If it's a valid argument, fill the required variables, if not, print an error and exit;
-// for the elements parse, check if there is only two args after spliting. Check if the second arg is valid.
+    i = 0;
+    while (comp->map[i])
+    {
+        j = 0;
+        while (comp->map[i][j])
+        {
+            if (comp->map[i][j] == 'N' || comp->map[i][j] == 'W'
+				|| comp->map[i][j] == 'E' || comp->map[i][j] == 'S')
+            {
+				comp->player_x = i;
+				comp->player_y = j;
+				return ;
+			}
+            j++;
+        }
+        i++;
+    }
+}
 
 int	num_of_commas(char *str)
 {
@@ -106,6 +121,25 @@ int	check(char **el, t_elements *elements)
 	return (1);
 }
 
+int	is_dir(t_elements *elements)
+{
+	int	*fds;
+	int	i;
+
+	fds = malloc(4 * sizeof(int));
+	fds[0] = open(elements->e_texture, __O_DIRECTORY);
+	fds[1] = open(elements->n_texture, __O_DIRECTORY);
+	fds[2] = open(elements->s_texture, __O_DIRECTORY);
+	fds[3] = open(elements->w_texture, __O_DIRECTORY);
+	i = 4;
+	while (--i >= 0)
+	{
+		if (fds[i] != -1)
+			return (free(fds), 1);
+	}
+	return (free(fds), 0);
+}
+
 int	check_element(char *element, t_elements *elements)
 {
 	char	*tmp;
@@ -148,9 +182,10 @@ int	read_file(char *arg, t_components *comp)
 		if (!line)
 			break ;
 	}
-	if (!line)
+	if (!line || is_dir(&comp->elements))
 		return (!printf("Invalid File\n"));
 	if (!read_map(scene_file, comp, line))
 		return (0);
-	return (check_map(comp->map));
+	set_player_cords(comp);
+	return (check_map(comp->map, comp));
 }

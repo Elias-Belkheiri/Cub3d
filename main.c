@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:10:29 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/24 16:41:05 by elias            ###   ########.fr       */
+/*   Updated: 2023/03/27 03:42:25 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	initialize_comps(t_components *comp)
 {
 	comp->map = NULL;
+	comp->player_x = 0;
+	comp->player_y = 0;
 	comp->elements.n_texture = NULL;
 	comp->elements.s_texture = NULL;
 	comp->elements.w_texture = NULL;
@@ -51,6 +53,8 @@ void print_data(t_components *comp)
 		printf("Floor Color %d,%d,%d\n", (comp->elements.f_color)[0], (comp->elements.f_color)[1], (comp->elements.f_color)[2]);
 	if (comp->elements.c_color)
 		printf("Ceil Color %d,%d,%d\n", (comp->elements.c_color)[0], (comp->elements.c_color)[1], (comp->elements.c_color)[2]);
+	printf("X: %d\n", comp->player_x);
+	printf("Y: %d\n", comp->player_y);
 	if (comp->map)
 	{
 		printf("\n-------------------------\n\n");
@@ -68,7 +72,8 @@ int	main(int argc, char *argv[])
 	initialize_comps(&comp);
 	if (!read_file(argv[1], &comp) || !check_comps(&comp))
 		return (0);
-	// print_data(&comp);
+	print_data(&comp);
 	
-	// system("leaks cub3d");
+	// system("leaks cub3d");b3d map.cub \n" RESET));
+	// initialize_comps(&comp);
 }

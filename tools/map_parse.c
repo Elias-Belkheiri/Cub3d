@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:03:31 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/24 23:10:51 by elias            ###   ########.fr       */
+/*   Updated: 2023/03/27 02:54:25 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,33 @@ int check_walls(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'x' && !check_space(map, i, j))
-				return (ft_free_all_mfs(map), 0);
+				return (0);
 			j++;
 		}
 		i++;
 	}
-	return (ft_free_all_mfs(map), 1);
+	return (1);
 }
 
-int	dup_map(char **map)
+int	dup_map(t_components *comp)
 {
 	int max;
 	int i;
 	char **dup_map;
 
-	max = get_max_line(map) + 2;
-	dup_map = malloc((arr_size(map) + 3) * sizeof(char *));
-	dup_map[arr_size(map) + 2] = 0;
+	max = get_max_line(comp->map) + 2;
+	dup_map = malloc((arr_size(comp->map) + 3) * sizeof(char *));
+	dup_map[arr_size(comp->map) + 2] = 0;
 	dup_map[0] = fill_map(max, NULL);
-	dup_map[arr_size(map) + 1] = fill_map(max, NULL);
+	dup_map[arr_size(comp->map) + 1] = fill_map(max, NULL);
 	i = 0;
-	while (map[i])
+	while (comp->map[i])
 	{
-		dup_map[i + 1] = fill_map(max, map[i]);
+		dup_map[i + 1] = fill_map(max, comp->map[i]);
 		i++;
 	}
-	// i = -1;
-	// while (dup_map[++i])
-	// 	printf("%s\n", dup_map[i]);
+	ft_free_all_mfs(comp->map);
+	comp->map = dup_map;
 	return (check_walls(dup_map));
 }
 
@@ -130,7 +129,7 @@ int check_space(char **map, int i, int j)
 	return (1);
 }
 
-int valid_space(char **map)
+int valid_space(char **map, t_components *comp)
 {
 	int i;
 	int j;
@@ -150,10 +149,10 @@ int valid_space(char **map)
 		}
 		i++;
 	}
-	return (dup_map(map));
+	return (dup_map(comp));
 }
 
-int check_map(char **map)
+int check_map(char **map, t_components *comp)
 {
 	int player;
 	int i;
@@ -180,7 +179,7 @@ int check_map(char **map)
 	}
 	if (!player)
 		return (!printf("The Player is missing\n"));
-	return (valid_space(map));
+	return (valid_space(map, comp));
 }
 
 int is_map_element(char *str)
