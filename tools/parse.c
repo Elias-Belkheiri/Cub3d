@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:27:23 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/27 03:42:14 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/06 01:31:36 by ebelkhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+{
+	return (*(int *)(unsigned char [4]){b, g, r, t});
+}
 
 void	set_player_cords(t_components *comp)
 {
@@ -63,17 +68,13 @@ int	arr_size(char **arr)
 	return (i);
 }
 
-int	parse_rgb(t_elements *elements, char *color, int a)
+int *parse_rgb_2(char **colors)
 {
 	int				i;
 	int				n;
-	char			**colors;
-	unsigned char	*rgb;
+	int				*rgb;
 
-	colors = ft_split(color, ',');
-	if (!colors || arr_size(colors) != 3 || num_of_commas(color) != 2)
-		return (0);
-	i = -1;
+	i = 0;
 	rgb = malloc(3 * sizeof(unsigned char));
 	while (colors[++i])
 	{
@@ -83,13 +84,30 @@ int	parse_rgb(t_elements *elements, char *color, int a)
 		else
 		{
 			ft_free_all_mfs(colors);
-			return (0);
+			return (NULL);
 		}
 	}
+	return (rgb);
+}
+
+int	parse_rgb(t_elements *elements, char *color, int a)
+{
+	int				i;
+	int				*rgb;
+	char			**colors;
+
+	colors = ft_split(color, ',');
+	if (!colors || arr_size(colors) != 3 || num_of_commas(color) != 2)
+		return (0);
+	i = -1;
+	rgb = parse_rgb_2(colors);
+	if (!rgb)
+		return (0);
 	if (a)
-		elements->c_color = rgb;
+		elements->c_color = create_trgb(0, rgb[0], rgb[1], rgb[2]);
 	else
-		elements->f_color = rgb;
+		elements->f_color = create_trgb(0, rgb[0], rgb[1], rgb[2]);
+	free(rgb);
 	ft_free_all_mfs(colors);
 	return (1);
 }
@@ -127,10 +145,10 @@ int	is_dir(t_elements *elements)
 	int	i;
 
 	fds = malloc(4 * sizeof(int));
-	fds[0] = open(elements->e_texture, __O_DIRECTORY);
-	fds[1] = open(elements->n_texture, __O_DIRECTORY);
-	fds[2] = open(elements->s_texture, __O_DIRECTORY);
-	fds[3] = open(elements->w_texture, __O_DIRECTORY);
+	fds[0] = open(elements->e_texture, O_DIRECTORY);
+	fds[1] = open(elements->n_texture, O_DIRECTORY);
+	fds[2] = open(elements->s_texture, O_DIRECTORY);
+	fds[3] = open(elements->w_texture, O_DIRECTORY);
 	i = 4;
 	while (--i >= 0)
 	{

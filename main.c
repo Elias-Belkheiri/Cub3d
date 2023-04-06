@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:10:29 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/27 03:42:25 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/06 01:32:14 by ebelkhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void	initialize_comps(t_components *comp)
 {
 	comp->map = NULL;
 	comp->player_x = 0;
+	comp->map_h = 0;
+	comp->map_w = 0;
 	comp->player_y = 0;
 	comp->elements.n_texture = NULL;
 	comp->elements.s_texture = NULL;
 	comp->elements.w_texture = NULL;
 	comp->elements.e_texture = NULL;
-	comp->elements.f_color = NULL;
-	comp->elements.c_color = NULL;
+	comp->elements.f_color = 0;
+	comp->elements.c_color = 0;
 }
 
 int	check_comps(t_components *comp)
@@ -50,9 +52,9 @@ void print_data(t_components *comp)
 	if (comp->elements.e_texture)
 		printf("East: %s\n", comp->elements.e_texture);
 	if (comp->elements.f_color)
-		printf("Floor Color %d,%d,%d\n", (comp->elements.f_color)[0], (comp->elements.f_color)[1], (comp->elements.f_color)[2]);
+		printf("Floor Color %d\n", comp->elements.f_color);
 	if (comp->elements.c_color)
-		printf("Ceil Color %d,%d,%d\n", (comp->elements.c_color)[0], (comp->elements.c_color)[1], (comp->elements.c_color)[2]);
+		printf("Ceil Color %d\n", comp->elements.c_color);
 	printf("X: %d\n", comp->player_x);
 	printf("Y: %d\n", comp->player_y);
 	if (comp->map)
@@ -61,6 +63,8 @@ void print_data(t_components *comp)
 		while (comp->map[i])
 			printf("%s\n", comp->map[i++]);
 	}
+	printf("map width: %d\n", comp->map_w);
+	printf("map height: %d\n", comp->map_h);
 }
 
 int	main(int argc, char *argv[])

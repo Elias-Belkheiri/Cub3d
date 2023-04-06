@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:11:07 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/03/27 02:56:14 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/06 01:31:44 by ebelkhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct t_elements
 	char			*s_texture;
 	char			*w_texture;
 	char			*e_texture;
-	unsigned char	*f_color;
-	unsigned char	*c_color;
+	int				f_color;
+	int				c_color;
 } t_elements;
 
 typedef struct t_components
@@ -44,6 +44,8 @@ typedef struct t_components
 	t_elements	elements;
 	int			player_x;
 	int			player_y;
+	int			map_h;
+	int			map_w;
 	char 		**map;
 } t_components;
 
@@ -68,3 +70,4 @@ int check_map(char **map, t_components *comp);
 int is_map_element(char *str);
 int	arr_size(char **arr);
 int check_space(char **map, int i, int j);
+int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);

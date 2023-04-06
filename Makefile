@@ -2,7 +2,7 @@ SRCS	= $(wildcard ./tools/*.c) main.c
 
 CC		= cc
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit
 
 NAME	= cub3d
 
