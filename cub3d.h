@@ -6,9 +6,12 @@
 /*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:11:07 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/04/06 01:31:44 by ebelkhei         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:40:36 by ebelkhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <unistd.h>
 # include <fcntl.h>
@@ -37,7 +40,7 @@ typedef struct t_elements
 	char			*e_texture;
 	int				f_color;
 	int				c_color;
-} t_elements;
+}	t_elements;
 
 typedef struct t_components
 {
@@ -46,15 +49,15 @@ typedef struct t_components
 	int			player_y;
 	int			map_h;
 	int			map_w;
-	char 		**map;
-} t_components;
+	char		**map;
+}	t_components;
 
 char		*get_next_line(int fd);
 size_t		ft_strlen(const char *s);
 char		*ft_join(char *str1, char *str2);
 char		*ft_strchr(const char *str, int c);
 size_t		get_len(char *str);
-int     	ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strcmp(const char *s1, const char *s2);
 char		**ft_split(char const *s, char c);
 char		*ft_strdup(const char *ptr);
@@ -65,9 +68,20 @@ long long	ft_atoi(const char *str);
 char		*ft_strtrim(char const *s1, char const *set);
 int			ft_isdigit(int arg);
 int			read_file(char *arg, t_components *comp);
-int	read_map(int fd, t_components *comp, char *line);
-int check_map(char **map, t_components *comp);
-int is_map_element(char *str);
-int	arr_size(char **arr);
-int check_space(char **map, int i, int j);
-int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+int			read_map(int fd, t_components *comp, char *line);
+int			check_map(char **map, t_components *comp);
+int			is_map_element(char *str);
+int			arr_size(char **arr);
+int			check_space(char **map, int i, int j);
+int			create_trgb(unsigned char t, unsigned char r,
+				unsigned char g, unsigned char b);
+int			check_map_2(char **map, t_components *comp, int player);
+char		*fill_map(int n, char *line);
+int			check_walls(char **map);
+int			get_max_line(char **map);
+int			valid_space(char **map, t_components *comp);
+int			num_of_commas(char *str);
+int			is_dir(t_elements *elements);
+void		set_player_cords(t_components *comp);
+
+#endif

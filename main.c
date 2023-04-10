@@ -6,7 +6,7 @@
 /*   By: ebelkhei <ebelkhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:10:29 by ebelkhei          #+#    #+#             */
-/*   Updated: 2023/04/06 01:32:14 by ebelkhei         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:43:13 by ebelkhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,18 @@ void	initialize_comps(t_components *comp)
 
 int	check_comps(t_components *comp)
 {
-	int a = comp->elements.c_color && comp->elements.f_color
-	&& comp->elements.n_texture && comp->elements.s_texture
-	&& comp->elements.w_texture && comp->elements.e_texture
-	&& comp->map;
+	int	a;
+
+	a = comp->elements.c_color && comp->elements.f_color
+		&& comp->elements.n_texture && comp->elements.s_texture
+		&& comp->elements.w_texture && comp->elements.e_texture
+		&& comp->map;
 	if (!a)
 		return (!printf("Missing Element\n"));
 	return (1);
 }
 
-void print_data(t_components *comp)
+void	print_data(t_components *comp)
 {
 	int	i;
 
@@ -76,8 +78,6 @@ int	main(int argc, char *argv[])
 	initialize_comps(&comp);
 	if (!read_file(argv[1], &comp) || !check_comps(&comp))
 		return (0);
+	set_player_cords(&comp);
 	print_data(&comp);
-	
-	// system("leaks cub3d");b3d map.cub \n" RESET));
-	// initialize_comps(&comp);
 }
